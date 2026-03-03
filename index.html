@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookstore</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">📚 My Bookstore</div>
+
+    <div class="search">
+        <input type="text" id="search-input" placeholder="Tìm tên sách...">
+    </div>
+
+    <div class="menu">
+    <span>🛒 Giỏ hàng (<b id="cart-count">0</b>)</span>
+    <span id="account-btn">👤 Tài khoản</span>
+</div>
+</header>
+
+<!-- SLIDER -->
+<section class="banner">
+    <div class="slider">
+        <img src="images/ảnh1.png" class="slide active">
+        <img src="images/ảnh2.png" class="slide">
+        <img src="images/ảnh3.png" class="slide">
+    </div>
+</section>
+
+<section class="main">
+
+    <!-- SIDEBAR TRÁI -->
+    <aside class="sidebar-left">
+        <h3>Danh mục</h3>
+        <ul>
+            <li>Lập trình</li>
+            <li>Tâm lý - Kỹ năng sống</li>
+            <li>Kinh doanh</li>
+            <li>Marketing</li>
+            <li>Văn học</li>
+            <li>Thiếu nhi</li>
+        </ul>
+
+        <button class="sale-btn">🎁 Mua sách giảm giá</button>
+    </aside>
+
+    <!-- SẢN PHẨM -->
+    <div class="content">
+        <h2>Sách nổi bật</h2>
+        <div class="book-grid" id="book-container"></div>
+        <div id="pagination-wrapper"></div>
+    </div>
+
+    <!-- SIDEBAR PHẢI -->
+    <aside class="sidebar-right">
+        <h3>Bán chạy nhất</h3>
+        <div id="best-seller"></div>
+    </aside>
+
+</section>
+
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h3>📚 My Bookstore</h3>
+            <p>Website bán sách uy tín, đa dạng thể loại, giao hàng toàn quốc.</p>
+            <p>📍 Địa chỉ: Hồ CHí Minh , Việt Nam</p>
+            <p>📞 Hotline: 0353826031</p>
+            <p>✉Email: binhnvb24@gmail.com</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Hỗ trợ khách hàng</h4>
+            <ul>
+                <li>Hướng dẫn mua hàng</li>
+                <li>Phương thức thanh toán</li>
+                <li>Chính sách đổi trả</li>
+                <li>Câu hỏi thường gặp</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Chính sách</h4>
+            <ul>
+                <li>Chính sách bảo mật</li>
+                <li>Điều khoản sử dụng</li>
+                <li>Chính sách vận chuyển</li>
+            </ul>
+        </div>
+
+         <div class="footer-col">
+            <h4>Kết nối với chúng tôi</h4>
+            <div class="social">
+    <a href="https://www.facebook.com/share/1HF5y4VTwz/" target="_blank">🌐 Facebook</a><br>
+    <a href="https://www.instagram.com/tran_vanbinh1501?igsh=cW14eTgzcjlna2s0" target="_blank">📸 Instagram</a><br>
+</div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 My Bookstore. All rights reserved.
+    </div>
+</footer>
+<!-- BOOK DETAIL MODAL -->
+<div id="book-modal" class="modal">
+    <div class="modal-content" id="book-detail"></div>
+</div>
+<!-- ACCOUNT MODAL -->
+<div id="account-modal" class="modal">
+    <div class="account-box">
+
+        <div id="auth-section">
+            <div class="account-tabs">
+                <button id="login-tab" class="active">Đăng nhập</button>
+                <button id="register-tab">Đăng ký</button>
+            </div>
+
+            <!-- LOGIN -->
+            <div id="login-form" class="form">
+                <input type="text" id="login-username" placeholder="Tên đăng nhập">
+                <input type="password" id="login-password" placeholder="Mật khẩu">
+                <button onclick="login()">Đăng nhập</button>
+            </div>
+
+            <!-- REGISTER -->
+            <div id="register-form" class="form" style="display:none">
+                <input type="text" id="reg-username" placeholder="Tên đăng nhập">
+                <input type="password" id="reg-password" placeholder="Mật khẩu">
+                <input type="password" id="reg-confirm" placeholder="Nhập lại mật khẩu">
+                <input type="text" id="reg-fullname" placeholder="Họ và tên">
+                <input type="email" id="reg-email" placeholder="Email">
+                <input type="text" id="reg-phone" placeholder="Số điện thoại">
+                <input type="text" id="reg-address" placeholder="Địa chỉ">
+                <button onclick="register()">Đăng ký</button>
+            </div>
+        </div>
+
+        <!-- ACCOUNT DASHBOARD -->
+        <div id="account-dashboard" style="display:none">
+            <h3 id="welcome-user"></h3>
+
+            <div class="account-menu">
+                <button onclick="showProfile()">Thông tin cá nhân</button>
+                <button onclick="showOrders()">Lịch sử mua hàng</button>
+                <button onclick="logout()">Đăng xuất</button>
+            </div>
+
+            <div id="account-content"></div>
+        </div>
+
+    </div>
+</div>
+<!-- CART OVERLAY -->
+<div id="cart-overlay"></div>
+<!-- CART PANEL -->
+<div id="cart-panel" class="cart-panel">
+
+    <div class="cart-header">
+        <h3>🛒 Giỏ hàng của bạn</h3>
+        <span onclick="toggleCart()">✖</span>
+    </div>
+
+    <div id="cart-items" class="cart-items"></div>
+
+    <div class="cart-footer">
+        <h4>Tổng tiền: <span id="cart-total">0</span>đ</h4>
+        <button onclick="checkout()">Thanh toán</button>
+    </div>
+
+</div>
+<!-- CHECKOUT MODAL -->
+<div id="checkout-modal" class="modal">
+    <div class="checkout-box">
+        <h3>Thông tin thanh toán</h3>
+
+        <input type="text" id="checkout-name" placeholder="Họ tên">
+        <input type="text" id="checkout-phone" placeholder="Số điện thoại">
+        <input type="text" id="checkout-address" placeholder="Địa chỉ giao hàng">
+
+        <select id="checkout-method">
+            <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+            <option value="BANK">Chuyển khoản ngân hàng</option>
+        </select>
+
+        <button onclick="confirmCheckout()">Xác nhận thanh toán</button>
+        
+    </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
