@@ -735,26 +735,4 @@ footer{
 
 .btn-buy:hover{
     background:#c62828;
-}/* ================= MOBILE ================= */
-@media (max-width: 768px) {
-
-    .container {
-        flex-direction: column;
-    }
-
-    .sidebar-left,
-    .sidebar-right {
-        width: 100%;
-        margin-bottom: 20px;
-        display: block;
-    }
-
-    .content {
-        width: 100%;
-    }
-
-    .book-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
 }
